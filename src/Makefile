@@ -14,6 +14,7 @@ DEST_DIR = build/dest/
 
 # 编译选项
 CFLAGS = -fdiagnostics-color=always -I"./${SRC_DIR}" -I"./${INC_DIR}"
+CFLAGS += --std=c++20
 
 # 源文件和目标文件
 SRC = $(SRC_DIR)main.cpp
@@ -26,7 +27,7 @@ $(BUILD_DIR)program_info.o
 # OBJ += $(BUILD_DIR)resource.res
 
 # 目标可执行文件
-TARGET = $(DEST_DIR)Example.exe
+TARGET = $(DEST_DIR)CBJQ_Mainland_VR_Start.exe
 
 # 目标规则
 all: $(TARGET)
@@ -34,7 +35,7 @@ all: $(TARGET)
 # 链接目标文件生成可执行文件
 $(TARGET): $(OBJ)
 	@ echo Compiling $@
-	$(CPPC) -fdiagnostics-color=always $(OBJ) -o $(TARGET)
+	$(CPPC) -fdiagnostics-color=always -static-libgcc -static-libstdc++ $(OBJ) -o $(TARGET)
 
 # 编译源文件生成目标文件
 # build/%.o: src/%.c
