@@ -1,0 +1,66 @@
+#pragma code_page(65001)
+
+#define UNICODE
+#define _UNICODE
+
+// 定义产品及程序名称
+#define PROGRAM_NAME_PRETTY         "Example\0"
+#define INTERNAL_PROGRAM_NAME       "Example\0"
+#define ORIGINAL_FILE_NAME          "Example.exe\0"
+// 定义文件版本
+#define VER_FILEVERSION             1,0,0,0
+#define VER_FILEVERSION_STR         "1.0.0.0\0"
+// 定义产品版本
+#define VER_PRODUCTVERSION          1,0,0,0
+#define VER_PRODUCTVERSION_STR      "1.0.0.0\0"
+// 定义文件描述
+#define VER_FILEDESCRIPTION         "Example\0"
+// 定义作者信息
+#define AUTHOR_NAME                 "example\0"
+#define AUTHOR_EMAIL                "example@example.com\0"
+// 定义版权信息
+#define LEGALCOPYRIGHT              "\0"
+// 定义项目链接
+#define PROJECT_URL                 "\0"
+#define WEBSITE_URL                 "\0"
+
+#ifdef RC_INVOKED
+#include <winver.h>
+
+VS_VERSION_INFO VERSIONINFO
+FILEVERSION VER_FILEVERSION
+PRODUCTVERSION VER_PRODUCTVERSION
+FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+FILEFLAGS 0x1L
+#else
+FILEFLAGS 0x0L
+#endif
+FILEOS 0x4L
+FILETYPE 0x1L
+FILESUBTYPE 0x0L
+{
+    BLOCK "StringFileInfo"
+    {
+        BLOCK "040904b0"
+        {
+            VALUE "CompanyName", "\0"
+            VALUE "FileDescription", VER_FILEDESCRIPTION
+            VALUE "FileVersion", VER_FILEVERSION_STR
+            VALUE "InternalName", INTERNAL_PROGRAM_NAME
+            VALUE "OriginalFilename", ORIGINAL_FILE_NAME
+            VALUE "ProductName", PROGRAM_NAME_PRETTY
+            VALUE "ProductVersion", VER_PRODUCTVERSION_STR
+            VALUE "LegalCopyright", LEGALCOPYRIGHT
+            VALUE "Author", AUTHOR_NAME
+            VALUE "Email", AUTHOR_EMAIL
+            VALUE "ProjectUrl", PROJECT_URL
+            VALUE "URL", WEBSITE_URL
+        }
+    }
+    BLOCK "VarFileInfo"
+    {
+        VALUE "Translation", 0x804, 1200
+    }
+}
+#endif
