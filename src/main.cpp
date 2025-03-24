@@ -127,14 +127,14 @@ int main(int argc, char **argv) {
 
                     if (access(dllPath.c_str(), F_OK)) {
                         if (InjectDLL(processId, dllPath)) {
-                            cout << format("Successfully injected {} into process {}\n", dll, GameExecutableName);
+                            cout << format("Successfully injected {} into process {} (pid: {}).\n", dll, GameExecutableName, processId);
                         }
                         else {
-                            cerr << format("Failed to inject {} into process {}\n", dll, GameExecutableName);
+                            cerr << format("Failed to inject {} into process {} (pid: {}).\n", dll, GameExecutableName, processId);
                         }
                     }
                     else {
-                        cerr << format("Skipping injection, DLL not found: {}\n", dllPath);
+                        cerr << format("Skipping injection, DLL not found: {} (pid: {}).\n", dllPath, processId);
                     }
                 }
 
