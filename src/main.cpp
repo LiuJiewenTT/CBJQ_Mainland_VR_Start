@@ -115,6 +115,7 @@ int main(int argc, char **argv) {
         } 
     }
 
+    cout << format("Waiting for game process ({}) to start...\n", GameExecutableName);
 
     while (true) {
         std::vector<DWORD> processIds = GetProcessIds(GameExecutableName);

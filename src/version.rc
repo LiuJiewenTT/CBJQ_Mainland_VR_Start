@@ -22,7 +22,7 @@
 #define LEGALCOPYRIGHT              "\0"
 // 定义项目链接
 #define PROJECT_URL                 "https://github.com/LiuJiewenTT/CBJQ_Mainland_VR_Start\0"
-#define WEBSITE_URL                 "\0"
+#define WEBSITE_URL                 "https://LiuJiewenTT.github.io/CBJQ_Mainland_VR_Start/\0"
 
 #ifdef RC_INVOKED
 #include <winver.h>
