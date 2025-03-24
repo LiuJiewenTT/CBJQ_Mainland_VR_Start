@@ -2,6 +2,9 @@
 
 最简方式启动国服尘白VR
 
+项目地址：[https://github.com/LiuJiewenTT/CBJQ_Mainland_VR_Start](https://github.com/LiuJiewenTT/CBJQ_Mainland_VR_Start)<br>
+项目主页：[https://LiuJiewenTT.github.io/CBJQ_Mainland_VR_Start](https://LiuJiewenTT.github.io/CBJQ_Mainland_VR_Start)<br>
+下载页：[https://github.com/LiuJiewenTT/CBJQ_Mainland_VR_Start/releases](https://github.com/LiuJiewenTT/CBJQ_Mainland_VR_Start/releases)<br>
 
 <div style="align-items: center; justify-content: center; display: flex; margin: 10px; gap: 10px">
    <img alt="GitHub Downloads (all assets, all releases)" src="https://img.shields.io/github/downloads/LiuJiewenTT/CBJQ_Mainland_VR_Start/total">
