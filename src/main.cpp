@@ -171,7 +171,7 @@ vector<DWORD> GetProcessIds(const string& processName) {
     }
 
     wchar_t *processName_w = convertCharToWChar(processName.c_str());
-    std::wstring processName_wstr(processName_w, 0);
+    std::wstring processName_wstr(processName_w);
 
     if (Process32First(snapshot, &processEntry)) {
         do {
