@@ -14,6 +14,7 @@
 
 using std::cout;
 using std::cerr;
+using std::endl;
 using std::string;
 using std::vector;
 
@@ -63,7 +64,7 @@ int main(int argc, char **argv) {
     p1 = strrchr(argv[0], path_delimeter);
     if( p1 == NULL ){
         strcpy(program_name, argv[0]);
-        sprintf(program_working_dir, ".\\");
+        sprintf(program_working_dir, ".");
     }
     else {
         strcpy(program_name, p1+1);
@@ -122,11 +123,11 @@ int main(int argc, char **argv) {
 
         if (!processIds.empty()) {
             for (DWORD processId : processIds) {
-
+                cout << endl;
                 for (const string& dll : dlls) {
                     string dllPath = format("{}\\{}", program_working_dir, dll);
 
-                    if (access(dllPath.c_str(), F_OK)) {
+                    if (!_access(dllPath.c_str(), F_OK)) {
                         if (InjectDLL(processId, dllPath)) {
                             cout << format("Successfully injected {} into process {} (pid: {}).\n", dll, GameExecutableName, processId);
                         }
@@ -138,7 +139,7 @@ int main(int argc, char **argv) {
                         cerr << format("Skipping injection, DLL not found: {} (pid: {}).\n", dllPath, processId);
                     }
                 }
-
+                cout << endl;
             }
             break;
         }
@@ -190,31 +191,37 @@ vector<DWORD> GetProcessIds(const string& processName) {
 
 
 bool InjectDLL(DWORD processId, const string& dllPath) {
+    wchar_t *dllPath_w = convertCharToWChar(dllPath.c_str());
     HANDLE process = OpenProcess(PROCESS_ALL_ACCESS, FALSE, processId);
     if (!process) {
-        cout << format("Failed to open process: {}\n", std::to_string(processId));
+        cerr << format("{}: Failed to open process: {}\n", __FUNCTION__, std::to_string(processId));
         return false;
     }
 
-    LPVOID allocMem = VirtualAllocEx(process, nullptr, dllPath.size() * sizeof(wchar_t), MEM_RESERVE | MEM_COMMIT, PAGE_READWRITE);
+    LPVOID allocMem = VirtualAllocEx(process, nullptr, wcslen(dllPath_w) * sizeof(wchar_t), MEM_RESERVE | MEM_COMMIT, PAGE_READWRITE);
     if (!allocMem) {
         CloseHandle(process);
-        cout << format("Failed to allocate memory in process: {}\n", std::to_string(processId));
+        cerr << format("{}: Failed to allocate memory in process: {}\n", __FUNCTION__, std::to_string(processId));
         return false;
     }
 
-    if (!WriteProcessMemory(process, allocMem, dllPath.c_str(), dllPath.size() * sizeof(wchar_t), nullptr)) {
+    if (!WriteProcessMemory(process, allocMem, dllPath_w, wcslen(dllPath_w) * sizeof(wchar_t), nullptr)) {
+        free(dllPath_w);
+        dllPath_w = nullptr;
         VirtualFreeEx(process, allocMem, 0, MEM_RELEASE);
         CloseHandle(process);
-        cout << format("Failed to write memory in process: {}\n", std::to_string(processId));
+        cerr << format("{}: Failed to write memory in process: {}\n", __FUNCTION__, std::to_string(processId));
         return false;
     }
 
-    HANDLE thread = CreateRemoteThread(process, nullptr, 0, (LPTHREAD_START_ROUTINE)LoadLibraryW, allocMem, 0, nullptr);
+    free(dllPath_w);
+    dllPath_w = nullptr;
+
+    HANDLE thread = CreateRemoteThread(process, nullptr, 0, (LPTHREAD_START_ROUTINE)LoadLibrary, allocMem, 0, nullptr);
     if (!thread) {
         VirtualFreeEx(process, allocMem, 0, MEM_RELEASE);
         CloseHandle(process);
-        cout << format("Failed to create remote thread in process: {}\n", std::to_string(processId));
+        cerr << format("{}: Failed to create remote thread in process: {}\n", __FUNCTION__, std::to_string(processId));
         return false;
     }
 
@@ -223,6 +230,6 @@ bool InjectDLL(DWORD processId, const string& dllPath) {
     CloseHandle(thread);
     CloseHandle(process);
 
-    cout << format("DLL injected successfully: {} into process {}\n", dllPath, std::to_string(processId));
+    // cout << format("{}: DLL injected successfully: {} into process {}\n", __FUNCTION__, dllPath, std::to_string(processId));
     return true;
 }
