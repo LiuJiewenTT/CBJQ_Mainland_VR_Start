@@ -2,4 +2,6 @@
 
 #include "resource.hpp"
 
-IDI_APP_ICON1 ICON "res\\icons\\icon1.ico"
+IDI_APP_ICON1 ICON "res\\icons\\fritia_watch.ico"
+
+1 24 "src\\main.manifest"

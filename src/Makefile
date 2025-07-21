@@ -24,7 +24,7 @@ $(BUILD_DIR)version.o\
 $(BUILD_DIR)program_info.o
 
 # 按需启用图标
-# OBJ += $(BUILD_DIR)resource.res
+OBJ += $(BUILD_DIR)resource.res
 
 # 目标可执行文件
 TARGET = $(DEST_DIR)CBJQ_Mainland_VR_Start.exe

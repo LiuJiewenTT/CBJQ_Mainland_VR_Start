@@ -2,6 +2,10 @@
 
 最简方式启动国服尘白VR
 
+<div style="align-items: center; justify-content: center; display: flex; margin: 10px;">
+   <img src="res\fritia_watch.jpg" style=" max-height: 300px; max-width:75%; aspect-ratio: 1;">
+</div>
+
 项目地址：[https://github.com/LiuJiewenTT/CBJQ_Mainland_VR_Start](https://github.com/LiuJiewenTT/CBJQ_Mainland_VR_Start)<br>
 项目主页：[https://LiuJiewenTT.github.io/CBJQ_Mainland_VR_Start](https://LiuJiewenTT.github.io/CBJQ_Mainland_VR_Start)<br>
 下载页：[https://github.com/LiuJiewenTT/CBJQ_Mainland_VR_Start/releases](https://github.com/LiuJiewenTT/CBJQ_Mainland_VR_Start/releases)<br>
@@ -23,6 +27,9 @@
 5. 运行`CBJQ_Mainland_VR_Start.exe`（或快捷方式）。
 6. 启动游戏。
 
+> [!NOTE]
+> - 对于低于`v1.1.0`的版本，自尘白3.0起，需要使用管理员权限运行。
+
 ## 构建指南
 
 本项目使用`GNU GCC 14.2.0`, `g++.exe`, `C++20`编译构建（`win32`, `seh`, `ucrt`, `x86_64`）。
@@ -30,6 +37,7 @@
 构建程序须在项目根目录执行：`make -f src\Makefile`；<br>
 程序会生成在`build/dest/`目录下。
 
+> [!TIP]
 > - 构建前你可能需要使用`prepare_dir`伪目标准备好所有所需目录。
 > - `make`的来源请参考：[LiuJiewenTT/WinEnv4MinGW-GCC](https://github.com/LiuJiewenTT/WinEnv4MinGW-GCC)或[env-README.md](env-README.md)。
 > - 项目模板的来源请参考：[LiuJiewenTT/WinGPPProjectStarter1](https://github.com/LiuJiewenTT/WinGPPProjectStarter1)或[starter-README.md](starter-README.md)。

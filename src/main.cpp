@@ -15,6 +15,7 @@
 using std::cout;
 using std::cerr;
 using std::endl;
+using std::format;
 using std::string;
 using std::vector;
 
@@ -47,6 +48,9 @@ int main(int argc, char **argv) {
     wchar_t tempwstr1[TEMPWSTR_LENGTH];
     wchar_t *pw1 = NULL, 
             *pw2 = NULL;
+    bool flag_some_failed = false,
+         flag_some_skipped = false;
+    double pause_time = 10000; // in milliseconds
 
     string GameExecutableName = "Game.exe";
     vector<string> dlls = {
@@ -78,7 +82,7 @@ int main(int argc, char **argv) {
         swprintf(tempwstr1, TEMPWSTR_LENGTH, L"错误：pwd绝对路径推算失败。");
         printf("%ls\n", tempwstr1);
         MessageBox(hwnd, (tempwstr1), (internal_program_name_wstr), MB_OK);
-        return 0;
+        exit(1);
     }
     printf("program_working_dir=%s\n", program_working_dir);
 
@@ -91,14 +95,14 @@ int main(int argc, char **argv) {
             swprintf(tempwstr1, TEMPWSTR_LENGTH, L"错误：cwd绝对路径推算失败。");
             printf("%ls\n", tempwstr1);
             MessageBox(hwnd, (tempwstr1), (internal_program_name_wstr), MB_OK);
-            return 0;
+            exit(3);
         }
         printf("Current working directory=%s\n", cwd);
     } else {
         swprintf(tempwstr1, TEMPWSTR_LENGTH, L"错误：无法获取当前工作目录。");
         printf("%ls\n", tempwstr1);
         MessageBox(hwnd, (tempwstr1), (internal_program_name_wstr), MB_OK);
-        return 0;
+        exit(2);
     }
 
 
@@ -112,7 +116,7 @@ int main(int argc, char **argv) {
             swprintf(tempwstr1, TEMPWSTR_LENGTH, L"错误：无法更换当前工作目录到程序所在目录。");
             printf("%ls\n", tempwstr1);
             MessageBox(hwnd, (tempwstr1), (internal_program_name_wstr), MB_OK);
-            return 0;
+            exit(4);
         } 
     }
 
@@ -133,10 +137,12 @@ int main(int argc, char **argv) {
                         }
                         else {
                             cerr << format("Failed to inject {} into process {} (pid: {}).\n", dll, GameExecutableName, processId);
+                            flag_some_failed = true;
                         }
                     }
                     else {
                         cerr << format("Skipping injection, DLL not found: {} (pid: {}).\n", dllPath, processId);
+                        flag_some_skipped = true;
                     }
                 }
                 cout << endl;
@@ -145,6 +151,17 @@ int main(int argc, char **argv) {
         }
 
         Sleep(10);
+    }
+
+    if ( flag_some_failed ) {
+        swprintf(tempwstr1, TEMPWSTR_LENGTH, L"错误：部分DLL注入失败。");
+        printf("%ls\n", tempwstr1);
+        MessageBox(hwnd, (tempwstr1), (internal_program_name_wstr), MB_OK);
+        exit(5);
+    } 
+    if ( flag_some_skipped ) {
+        cout << format("Some DLLs were skipped because they were not found.\n Paused for {} seconds before exiting.\n", pause_time/1000);
+        Sleep(pause_time);
     }
 
     return 0;
