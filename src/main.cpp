@@ -56,7 +56,8 @@ int main(int argc, char **argv) {
     vector<string> dlls = {
         "openvr_api.dll",
         "LuaVR.dll",
-        "UEVRBackend.dll"
+        "UEVRBackend.dll",
+        "openxr_loader.dll"
     };
     DWORD processId;
 
@@ -160,7 +161,7 @@ int main(int argc, char **argv) {
         exit(5);
     } 
     if ( flag_some_skipped ) {
-        cout << format("Some DLLs were skipped because they were not found.\n Paused for {} seconds before exiting.\n", pause_time/1000);
+        cout << format("Some DLLs were skipped because they were not found.\n Paused for {} seconds before exit.\n", pause_time/1000);
         Sleep(pause_time);
     }
 
