@@ -6,6 +6,6 @@ This is a simple project starter for WinGCC. It includes a simple framework for 
 
 To begin with, all you need to do is fill your information in `Makefile` and `version.rc`. Then, you can call `PROGRAM_INFO_STRING` in your `main()` function as the beginning of your program. Compile and run the program, you should see something like this: 
 
-![效果图1](docs/效果图1.png)
+![效果图1](docs/env-starter/效果图1.png)
 
 > Tip: You may consider deleting the `docs` directory on demand.

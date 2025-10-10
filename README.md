@@ -17,6 +17,16 @@
    <img alt="GitHub License" src="https://img.shields.io/github/license/LiuJiewenTT/CBJQ_Mainland_VR_Start">
 </div>
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" >
+<script src="readme.js" ></script>
+<!-- <link rel="stylesheet" href="docs/doc_res/css/main.css" > -->
+<link rel="stylesheet" href="docs/doc_res/css/go-to-top.css" >
+<link rel="stylesheet" href="docs/doc_res/css/quick-navigate.css" >
+
+<div class="go-to-top" style="display: none;">
+    <i class="fas fa-arrow-up"></i>
+</div>
+
 
 ## 使用
 
