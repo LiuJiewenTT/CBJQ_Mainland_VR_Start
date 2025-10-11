@@ -22,6 +22,7 @@
 <!-- <link rel="stylesheet" href="docs/doc_res/css/main.css" > -->
 <link rel="stylesheet" href="docs/doc_res/css/go-to-top.css" >
 <link rel="stylesheet" href="docs/doc_res/css/quick-navigate.css" >
+<link rel="stylesheet" href="docs/doc_res/css/github-markdown-alert.css">
 
 <div class="go-to-top" style="display: none;">
     <i class="fas fa-arrow-up"></i>

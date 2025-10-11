@@ -7,4 +7,5 @@ function add_script(src) {
 
 add_script('https://code.jquery.com/jquery-3.6.0.min.js');
 add_script('docs/doc_res/js/go_to_top.js');
+add_script('docs/doc_res/js/github-markdown-alert-reproduce.js');
 
