@@ -3,16 +3,16 @@
     --base-size-8: 0.5rem;
     --base-size-16: 1rem;
     --borderColor-default: #d1d9e0;
-    --base-text-weight-medium: ;
+    --base-text-weight-medium: 500;
     --borderColor-accent-emphasis: #0969da;
     --fgColor-accent: #0969da;
-    --borderColor-done-emphasis: ;
+    --borderColor-done-emphasis: #8250df;
     --fgColor-done: #8250df;
-    --borderColor-attention-emphasis: ;
+    --borderColor-attention-emphasis: #9a6700;
     --fgColor-attention: #9a6700;
-    --borderColor-success-emphasis: ;
+    --borderColor-success-emphasis: #1a7f37;
     --fgColor-success: #1a7f37;
-    --borderColor-danger-emphasis: ;
+    --borderColor-danger-emphasis: #cf222e;
     --fgColor-danger: #d1242f;
     
     --fgColor-closed: var(--fgColor-danger);
@@ -36,6 +36,11 @@
 
 .markdown-alert>:last-child {
     margin-bottom: 0
+}
+
+.markdown-alert-title {
+    font-family: var(--fontStack-sansSerif, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji");
+    font-size: 16px;
 }
 
 .markdown-alert .markdown-alert-title {
@@ -83,4 +88,12 @@
 
 .markdown-alert.markdown-alert-caution .markdown-alert-title {
     color: var(--fgColor-danger)
+}
+
+.markdown-alert svg.markdown-alert-icon {
+    margin-right: var(--base-size-8, 8px) !important;
+    display: inline-block;
+	overflow: visible !important;
+    vertical-align: text-bottom;
+    fill: currentColor;
 }
