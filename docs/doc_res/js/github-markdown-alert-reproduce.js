@@ -22,8 +22,12 @@ const svg_map = {
 function process_blockquote_to_markdown_alert() {
     $('blockquote').each(function () {
         var $this = $(this);
-        var $para0 = $this.find('p:first-child');
+        var $para0 = $this.find('p').first();
         var text = $para0.text().trim();
+
+        if ( $this.hasClass('markdown-alert') && $para0.hasClass('markdown-alert-title') ) {
+            return;
+        }
 
         // 检测是否包含提示类型
         var match = text.match(/^\[\!(NOTE|TIP|IMPORTANT|CAUTION|WARNING)\]/i);
